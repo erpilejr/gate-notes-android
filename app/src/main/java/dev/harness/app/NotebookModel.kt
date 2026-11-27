@@ -9,6 +9,10 @@ class NotebookModel {
         private set
     var draft: String by mutableStateOf("")
 
+    fun delete(index: Int) {
+        notes = notes.filterIndexed { i, _ -> i != index }
+    }
+
     fun add() {
         notes = listOf(draft) + notes
         draft = ""
