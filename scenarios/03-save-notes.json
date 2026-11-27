@@ -1,0 +1,109 @@
+{
+  "title": "Save notes",
+  "scenarios": [
+    {
+      "name": "Notes survive restart",
+      "lines": [
+        24
+      ],
+      "steps": [
+        {
+          "id": "note-input",
+          "op": "type",
+          "text": "Old"
+        },
+        {
+          "id": "add-button",
+          "op": "tap"
+        },
+        {
+          "id": "note-input",
+          "op": "type",
+          "text": "New"
+        },
+        {
+          "id": "add-button",
+          "op": "tap"
+        },
+        {
+          "op": "restart"
+        },
+        {
+          "id": "note-0",
+          "op": "shows",
+          "text": "New"
+        },
+        {
+          "id": "note-1",
+          "op": "shows",
+          "text": "Old"
+        },
+        {
+          "id": "note-2",
+          "op": "gone"
+        }
+      ]
+    },
+    {
+      "name": "Deleted stay gone",
+      "lines": [
+        24
+      ],
+      "steps": [
+        {
+          "id": "note-input",
+          "op": "type",
+          "text": "Keep"
+        },
+        {
+          "id": "add-button",
+          "op": "tap"
+        },
+        {
+          "id": "note-input",
+          "op": "type",
+          "text": "Drop"
+        },
+        {
+          "id": "add-button",
+          "op": "tap"
+        },
+        {
+          "id": "delete-0",
+          "op": "tap"
+        },
+        {
+          "op": "restart"
+        },
+        {
+          "id": "note-0",
+          "op": "shows",
+          "text": "Keep"
+        },
+        {
+          "id": "note-1",
+          "op": "gone"
+        }
+      ]
+    },
+    {
+      "name": "Empty after restart",
+      "lines": [
+        25
+      ],
+      "steps": [
+        {
+          "id": "note-0",
+          "op": "gone"
+        },
+        {
+          "op": "restart"
+        },
+        {
+          "id": "note-0",
+          "op": "gone"
+        }
+      ]
+    }
+  ]
+}
