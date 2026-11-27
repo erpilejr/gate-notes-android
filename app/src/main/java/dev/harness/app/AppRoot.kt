@@ -37,8 +37,7 @@ fun AppRoot() {
         draft = model.draft,
         onDraft = { model.draft = it },
         onAdd = { model.add() },
-        onDelete = { model.delete(it) },
-        price = formatPrice()
+        onDelete = { model.delete(it) }
     )
 }
 
@@ -48,9 +47,9 @@ fun Notebook(
     draft: String,
     onDraft: (String) -> Unit,
     onAdd: () -> Unit,
-    onDelete: (Int) -> Unit,
-    price: String
+    onDelete: (Int) -> Unit
 ) {
+    val price = formatPrice()
     Column(
         Modifier.fillMaxSize().padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
