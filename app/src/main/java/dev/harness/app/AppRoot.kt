@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
@@ -36,7 +37,7 @@ fun AppRoot() {
         draft = model.draft,
         onDraft = { model.draft = it },
         onAdd = { model.add() },
-        price = formatPrice()
+        onDelete = { model.delete(it) }
     )
 }
 
@@ -46,8 +47,9 @@ fun Notebook(
     draft: String,
     onDraft: (String) -> Unit,
     onAdd: () -> Unit,
-    price: String
+    onDelete: (Int) -> Unit
 ) {
+    val price = formatPrice()
     Column(
         Modifier.fillMaxSize().padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -64,7 +66,15 @@ fun Notebook(
         }
         LazyColumn(Modifier.weight(1f).fillMaxWidth()) {
             itemsIndexed(notes) { i, note ->
-                Text(note, Modifier.testTag("note-$i"))
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Text(note, Modifier.testTag("note-$i"))
+                    Button(onClick = { onDelete(i) }, modifier = Modifier.testTag("delete-$i")) {
+                        Text("Delete")
+                    }
+                }
             }
         }
         Text(price, Modifier.testTag("price"))
